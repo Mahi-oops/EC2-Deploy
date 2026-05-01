@@ -1,6 +1,6 @@
 import { useState } from "react";
 import flightImg from "../assets/flight.jpg";
-import indigoImg from "../assets/indiGo.jpg";
+import indigoImg from "../assets/indigo.jpg";
 import airindiaImg from "../assets/airindia.jpg";
 
 
