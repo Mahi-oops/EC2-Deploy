@@ -1,7 +1,7 @@
 import { useState } from "react";
 import flightImg from "../assets/flight.jpg";
-import IndiGoImg from "../assets/IndiGo.jpg";
-import AirIndiaImg from "../assets/AirIndia.jpg";
+import indigoImg from "../assets/indiGo.jpg";
+import airindiaImg from "../assets/airindia.jpg";
 
 
 type Flight = {
@@ -29,7 +29,7 @@ export default function FlightPage() {
       id: 1,
       name: "Sky Express",
       airline: "IndiGo",
-      image: IndiGoImg,
+      image: indigoImg,
       source: "Mumbai",
       destination: "Delhi",
       time: "08:00 AM",
@@ -39,7 +39,7 @@ export default function FlightPage() {
       id: 2,
       name: "Cloud Cruiser",
       airline: "Air India",
-      image: AirIndiaImg,
+      image: airindiaImg,
       source: "Mumbai",
       destination: "Bangalore",
       time: "02:30 PM",
