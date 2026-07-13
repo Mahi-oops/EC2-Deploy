@@ -18,4 +18,4 @@ jobs:
    - name: Checking files
      run: ls -l
    - name: Accessing the file
-     run: cd booking
+     run: cd booking && ls -l
