@@ -9,6 +9,8 @@ jobs:
  build:
   runs-on: Ubuntu-latest
   steps:
+   - name: checkout code
+     uses: actions/checkout@v4
    - name: Print Message
      run: echo "hello World, this is a test for CI/CD pipeline!!!!!!!!!!!!!!"
    - name: Checking path
