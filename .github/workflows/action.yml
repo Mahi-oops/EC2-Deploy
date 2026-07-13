@@ -15,3 +15,5 @@ jobs:
      run: pwd
    - name: Checking files
      run: ls -l
+   - name: Accessing the file
+     run: cd booking && ls -l
