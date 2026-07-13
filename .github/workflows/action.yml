@@ -2,7 +2,7 @@ Name: CI_CD_Pipeline
 
 on:
  push:
- branch:[main]
+  branch:['main']
 
 
 jobs:
