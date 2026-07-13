@@ -1,8 +1,8 @@
-Name: CI_CD_Pipeline
+name: CI_CD_Pipeline
 
 on:
  push:
-  branch:['main']
+  branches: ['main']
 
 
 jobs:
