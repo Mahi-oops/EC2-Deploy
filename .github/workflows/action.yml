@@ -16,4 +16,4 @@ jobs:
    - name: Accessing the file
      run: cd booking && pwd
    - name: Build and push docker image
-     run: docker build -t ghcr.io/mahi-oops/booking-app:${{github.run_number}} .
+     run: docker build -t ghcr.io/mahi-oops/booking-app:${{github.run_number}} ./booking
