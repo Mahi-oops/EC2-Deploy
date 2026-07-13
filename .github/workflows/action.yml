@@ -14,6 +14,6 @@ jobs:
    - name: Checking path
      run: pwd
    - name: Accessing the file
-     run: cd booking && ls -l
+     run: cd booking 
    - name: Build and push docker image
-     run: docker build -t ghcr.io/&{{github.repository_owner}}/booking-app:{{github.run_number}} .
+     run: docker build -t ghcr.io/${{github.repository_owner}}/booking-app:${{github.run_number}} .
