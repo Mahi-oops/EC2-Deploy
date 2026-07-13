@@ -6,12 +6,12 @@ on:
 
 
 jobs:
-build:
-run-on: Ubuntu-latest
-steps:
-- name: Print Message
-  run: echo "hello World, this is a test for CI/CD pipeline!!!!!!!!!!!!!!"
-- name: Checking path
-  run: pwd
-- name: Checking files
-  run: ls -l
+ build:
+  run-on: Ubuntu-latest
+ steps:
+ - name: Print Message
+   run: echo "hello World, this is a test for CI/CD pipeline!!!!!!!!!!!!!!"
+ - name: Checking path
+   run: pwd
+ - name: Checking files
+   run: ls -l
