@@ -29,3 +29,5 @@ jobs:
       password: ${{secrets.GITHUB_TOKEN}}
    - name: push image to GHCR
      run: docker push ghcr.io/mahi-oops/booking-app:${{github.run_number}} 
+   - name: Echoing the image name
+     run: echo "Image name: ghcr.io/mahi-oops/booking-app:${{ github.run_number }}"
