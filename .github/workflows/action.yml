@@ -39,5 +39,7 @@ jobs:
       uses: actions/checkout@v4
     - name: clone manifest repo
       run: git clone https://github.com/Mahi-oops/Github_action_CICD_manifest.git
+    - name: Checking path
+      run: pwd
     - name: Access manifest file
       run: cd manifest && pwd
