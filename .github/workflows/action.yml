@@ -44,4 +44,4 @@ jobs:
     - name: Checking path
       run: pwd
     - name: Access manifest file
-      run: cd manifest && pwd
+      run: cd Github_action_CICD_manifest.git && cd manifest && ls -l
