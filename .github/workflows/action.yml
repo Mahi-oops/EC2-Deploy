@@ -37,5 +37,7 @@ jobs:
    steps:
     - name: checkout code
       uses: actions/checkout@v4
-    - name: Acces manifest file
+    - name: clone manifest repo
+      run: git clone https://github.com/Mahi-oops/Github_action_CICD_manifest.git
+    - name: Access manifest file
       run: cd manifest && pwd
