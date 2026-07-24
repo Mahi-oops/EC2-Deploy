@@ -48,4 +48,4 @@ jobs:
         ls -l
         cd Github_action_CICD_manifest && cd manifest
         pwd
-        sed -i "s/build-.*/build-${{github.run_number}}/g" manifest.yaml
+        sed -i "s/build-.*/build-${{github.run_number}}/g" manifest.yml
