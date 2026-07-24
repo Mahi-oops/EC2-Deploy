@@ -48,5 +48,6 @@ jobs:
     - name: update the manifest file
       run: |
         pwd
+        ls -l
         cd Github_action_CICD_manifest && cd manifest
         sed -i "s/build-.*/build-${{github.run_number}}/g" Github_action_CICD_manifest/manifest/manifest.yaml
