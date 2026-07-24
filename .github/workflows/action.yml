@@ -47,5 +47,5 @@ jobs:
       run: |
         pwd
         ls -l
-        sudo cd Github_action_CICD_manifest
-        sed -i "s/build-.*/build-${{github.run_number}}/g" Github_action_CICD_manifest/manifest/manifest.yaml
+        cd Github_action_CICD_manifest
+        sed -i "s/build-.*/build-${{github.run_number}}/g" manifest/manifest.yaml
