@@ -57,4 +57,4 @@ jobs:
         git config --global user.email "avula2302@gmail.com"
         git add .
         git commit -m "Update the manifest file booking-app:${{github.run_number}}"
-        git push https://${{secrets.GITHUB_TOKEN}}@github.com/Mahi-oops/Github_action_CICD_manifest.git main
+        git push https://Mahi-oops:${{secrets.GITHUB_TOKEN}}@github.com/Mahi-oops/Github_action_CICD_manifest.git main
