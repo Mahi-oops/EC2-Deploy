@@ -50,3 +50,11 @@ jobs:
         pwd
         sed -i "s/booking-app: *./booking-app:${{github.run_number}}/g" manifest.yml
         cat manifest.yml
+    - name: commit and push changes
+      run: |
+        cd Github_action_CICD_manifest
+        git config --global user.name "Mahi-oops"
+        git config --global user.email "avula2302@gmail.com"
+        git add .
+        git commit -m "Update the manifest file booking-app:${{github.run_number}}"
+        git push https://${{secrets.GITHUB_TOKEN}}@github.com/Mahi-oops/Github_action_CICD_manifest.git main
