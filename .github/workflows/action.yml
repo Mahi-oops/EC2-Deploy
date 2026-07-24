@@ -43,11 +43,9 @@ jobs:
       run: ls -l 
     - name: Checking path
       run: pwd
-    - name: Access manifest file
-      run: cd Github_action_CICD_manifest && cd manifest && ls -l
     - name: update the manifest file
       run: |
         pwd
         ls -l
-        cd Github_action_CICD_manifest && cd manifest
+        cd Github_action_CICD_manifest
         sed -i "s/build-.*/build-${{github.run_number}}/g" Github_action_CICD_manifest/manifest/manifest.yaml
