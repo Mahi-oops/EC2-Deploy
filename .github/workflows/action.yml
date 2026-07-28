@@ -43,10 +43,10 @@ jobs:
       run: ls -l 
     - name: Checking path
       run: pwd
+    - name: Tag the image 
+      run: Tag=${{github.run_number}} && echo $Tag
     - name: update the manifest file
       run: |
-        Tag=${{github.run_number}}
-        echo $Tag
         ls -l
         cd Github_action_CICD_manifest && cd manifest
         pwd
