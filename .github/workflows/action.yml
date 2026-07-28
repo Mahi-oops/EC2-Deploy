@@ -45,15 +45,15 @@ jobs:
       run: pwd
     - name: update the manifest file
       run: |
+        Tag=${{github.run_number}}
+        echo $Tag
         ls -l
         cd Github_action_CICD_manifest && cd manifest
         pwd
-        sed -i "s/booking-app: *./booking-app:${{github.run_number}}/g" manifest.yml
+        sed -i "s/booking-app: *./booking-app:${{Tag}}/g" manifest.yml
         cat manifest.yml
     - name: commit and push changes
       run: |
-        Tag=${{github.run_number}}
-        echo $Tag
         cd Github_action_CICD_manifest
         git config --global user.name "Mahi-oops"
         git config --global user.email "avula2302@gmail.com"
