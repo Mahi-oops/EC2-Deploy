@@ -52,11 +52,13 @@ jobs:
         cat manifest.yml
     - name: commit and push changes
       run: |
+        Tag=${{github.run_number}}
+        echo $Tag
         cd Github_action_CICD_manifest
         git config --global user.name "Mahi-oops"
         git config --global user.email "avula2302@gmail.com"
         git add .
-        git commit -m "Update the manifest file booking-app:${{github.run_number}}"
+        git commit -m "Update the manifest file booking-app:${{Tag}}"
         git push https://Mahi-oops:${{secrets.CICD_GIT_SECRETS}}@github.com/Mahi-oops/Github_action_CICD_manifest.git main
     - name: success message
       run: echo "Manifest file updated successfully!!!!!!!!!!!"
