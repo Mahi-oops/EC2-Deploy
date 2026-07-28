@@ -49,7 +49,7 @@ jobs:
       run: |
         cd Github_action_CICD_manifest && cd manifest
         pwd
-        sed -i "s/booking-app: *./booking-app:${env.IMAGE_TAG}/g" manifest.yml
+        sed -i "s/booking-app: *./booking-app:${{env.IMAGE_TAG}}/g" manifest.yml
         cat manifest.yml
     - name: commit and push changes
       run: |
@@ -57,7 +57,7 @@ jobs:
         git config --global user.name "Mahi-oops"
         git config --global user.email "avula2302@gmail.com"
         git add .
-        git commit -m "Update the manifest file booking-app:${env.IMAGE_TAG}"
+        git commit -m "Update the manifest file booking-app:${{env.IMAGE_TAG}}"
         git push https://Mahi-oops:${{secrets.CICD_GIT_SECRETS}}@github.com/Mahi-oops/Github_action_CICD_manifest.git main
     - name: success message
       run: echo "Manifest file updated successfully!!!!!!!!!!!"
