@@ -43,11 +43,10 @@ jobs:
       run: ls -l 
     - name: Checking path
       run: pwd
-    - name: Tag the image 
-      run: TAG=${{github.run_number}} && echo $TAG
     - name: update the manifest file
       run: |
-        ls -l
+        TAG=${{github.run_number}}
+        echo $TAG
         cd Github_action_CICD_manifest && cd manifest
         pwd
         sed -i "s/booking-app: *./booking-app:$TAG/g" manifest.yml
