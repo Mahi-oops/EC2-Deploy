@@ -59,4 +59,4 @@ jobs:
         git commit -m "Update the manifest file booking-app:${{github.run_number}}"
         git push https://Mahi-oops:${{secrets.CICD_GIT_SECRETS}}@github.com/Mahi-oops/Github_action_CICD_manifest.git main
     - name: success message
-      run: echo "Manifest file updated successfully"
+      run: echo "Manifest file updated successfully!!!!!!!!!!"
