@@ -35,6 +35,8 @@ jobs:
 
  update_manifest_file:
    runs-on: ubuntu-latest 
+   env:
+    IMAGE_TAG: ${{github.run_number}}
    needs: build_image_and_push
    steps:
     - name: checkout code
@@ -49,7 +51,7 @@ jobs:
       run: |
         cd Github_action_CICD_manifest && cd manifest
         pwd
-        sed -i "s/booking-app: *./booking-app:$IMAGE_TAG/g" manifest.yml
+        sed -i "s/booking-app:*./booking-app:$IMAGE_TAG/g" manifest.yml
         cat manifest.yml
     - name: commit and push changes
       run: |
