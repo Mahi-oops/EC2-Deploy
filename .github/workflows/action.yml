@@ -10,8 +10,27 @@ permissions:
  packages: write
 
 jobs:
+ sast_scan:
+  runs-on: ubuntu-latest
+  steps:
+  - name: code checkout
+    uses: actions/checkout@v4
+  - name: install dependencies
+    uses: github/codeql-action/init@v2
+  - name: Install the dependencies & build 
+    run: | 
+     cd booking && npm install
+     npm run build
+  - name: run codeql analysis
+    uses: github/codeql-action/analyze@v2
+
+
+
+
+
  build_image_and_push:
-  runs-on: Ubuntu-latest
+  runs-on: ubuntu-latest
+  needs: sast_scan
   env:
    IMAGE_TAG: ${{github.run_number}}
   steps:
@@ -34,11 +53,11 @@ jobs:
 
 
  update_manifest_file:
-   runs-on: ubuntu-latest 
-   env:
-    IMAGE_TAG: ${{github.run_number}}
-   needs: build_image_and_push
-   steps:
+    runs-on: ubuntu-latest 
+    env:
+     IMAGE_TAG: ${{github.run_number}}
+    needs: build_image_and_push
+    steps:
     - name: checkout code
       uses: actions/checkout@v4
     - name: clone manifest repo
