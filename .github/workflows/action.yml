@@ -36,7 +36,8 @@ jobs:
        cd booking
        npm ci
        npm audit --audit-level=high
-
+   - name: success message
+     run: echo "Dependency scan completed successfully!!!!!!!!!!!"
 
 
  build_image_and_push:
