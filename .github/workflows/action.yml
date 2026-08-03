@@ -40,7 +40,7 @@ jobs:
      run: echo "Dependency scan completed successfully!!!!!!!!!!!"
 
 
- build_image_scan:
+ build_image_scan_push:
   runs-on: ubuntu-latest
   needs: dependency-scan
   env:
@@ -61,32 +61,23 @@ jobs:
       format: table
       exit-code: 1
       severity: HIGH,CRITICAL
-
- Push_image_to_GHCR:
-  runs-on: ubuntu-latest
-  needs: build_image_scan
-  env:
-    IMAGE_TAG: ${{github.run_number}}
-  steps:
-    - name: checkout code
-      uses: actions/checkout@v4
-    - name: login to github container registry
-      uses: docker/login-action@v2
-      with:
-       registry: ghcr.io
-       username: ${{github.actor}}
-       password: ${{secrets.GITHUB_TOKEN}}
-    - name: Access folder
-      run: cd booking 
-    - name: push image to GHCR
-      run: docker push ghcr.io/mahi-oops/booking-app:$IMAGE_TAG
+   - name: login to github container registry
+     uses: docker/login-action@v2
+     with:
+        registry: ghcr.io
+        username: ${{github.actor}}
+        password: ${{secrets.GITHUB_TOKEN}}
+   - name: Access folder
+     run: cd booking 
+   - name: push image to GHCR
+     run: docker push ghcr.io/mahi-oops/booking-app:$IMAGE_TAG
 
 
  update_manifest_file:
     runs-on: ubuntu-latest 
     env:
      IMAGE_TAG: ${{github.run_number}}
-    needs: Push_image_to_GHCR
+    needs: build_image_scan_push
     steps:
     - name: checkout code
       uses: actions/checkout@v4
