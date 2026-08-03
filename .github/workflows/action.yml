@@ -57,7 +57,7 @@ jobs:
    - name: scan the docker image
      uses: aquasecurity/trivy-action@master
      with:
-      image: ghcr.io/mahi-oops/booking-app:$IMAGE_TAG
+      image-ref: ghcr.io/mahi-oops/booking-app:$IMAGE_TAG
       format: table
       exit-code: 1
       severity: HIGH,CRITICAL
