@@ -40,7 +40,7 @@ jobs:
      run: echo "Dependency scan completed successfully!!!!!!!!!!!"
 
 
- build_image_and_push:
+ build_image_scan:
   runs-on: ubuntu-latest
   needs: dependency-scan
   env:
@@ -54,6 +54,20 @@ jobs:
      run: cd booking && pwd
    - name: Build and push docker image
      run: docker build -t ghcr.io/mahi-oops/booking-app:$IMAGE_TAG ./booking
+   - name: scan the docker image
+     uses: aquasecurity/trivy-action@master
+     with:
+      image: ghcr.io/mahi-oops/booking-app:$IMAGE_TAG
+      format: table
+      exit-code: 1
+      severity: HIGH,CRITICAL
+
+ Push_image_to_GHCR:
+  runs-on: ubuntu-latest
+  needs: build_image_scan
+  env:
+    IMAGE_TAG: ${{github.run_number}}
+  steps:
    - name: login to github container registry
      uses: docker/login-action@v2
      with:
@@ -68,7 +82,7 @@ jobs:
     runs-on: ubuntu-latest 
     env:
      IMAGE_TAG: ${{github.run_number}}
-    needs: build_image_and_push
+    needs: build_image_scan
     steps:
     - name: checkout code
       uses: actions/checkout@v4
