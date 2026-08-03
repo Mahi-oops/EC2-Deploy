@@ -68,16 +68,18 @@ jobs:
   env:
     IMAGE_TAG: ${{github.run_number}}
   steps:
-   - name: login to github container registry
-     uses: docker/login-action@v2
-     with:
-      registry: ghcr.io
-      username: ${{github.actor}}
-      password: ${{secrets.GITHUB_TOKEN}}
-   - name: Access folder
-     run: cd booking 
-   - name: push image to GHCR
-     run: docker push ghcr.io/mahi-oops/booking-app:$IMAGE_TAG
+    - name: checkout code
+      uses: actions/checkout@v4
+    - name: login to github container registry
+      uses: docker/login-action@v2
+      with:
+       registry: ghcr.io
+       username: ${{github.actor}}
+       password: ${{secrets.GITHUB_TOKEN}}
+    - name: Access folder
+      run: cd booking 
+    - name: push image to GHCR
+      run: docker push ghcr.io/mahi-oops/booking-app:$IMAGE_TAG
 
 
  update_manifest_file:
