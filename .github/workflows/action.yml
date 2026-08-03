@@ -82,7 +82,7 @@ jobs:
     runs-on: ubuntu-latest 
     env:
      IMAGE_TAG: ${{github.run_number}}
-    needs: build_image_scan
+    needs: build_image_to_GHCR
     steps:
     - name: checkout code
       uses: actions/checkout@v4
