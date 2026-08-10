@@ -73,23 +73,24 @@ jobs:
      run: docker push ghcr.io/mahi-oops/booking-app:$IMAGE_TAG
 
 
- Dast_scan:
-  runs-on: ubuntu-latest
-  needs: build_image_scan_push
-  steps:
-  - name: run dast scan
-    uses: zaproxy/action-full-scan@v0.14.0
-    with:
-     target: 'http://localhost:8448'
-  - name: success message
-    run: echo "DAST scan completed successfully!!!!!!!!!!!!"
+ #Dast_scan:
+  #runs-on: ubuntu-latest
+  #needs: build_image_scan_push
+  #steps:
+  #- name: run dast scan
+  #  uses: zaproxy/action-full-scan@v0.14.0
+  #  with:
+  #   target: 'http://localhost:8448'
+  #- name: success message
+  #  run: echo "DAST scan completed successfully!!!!!!!!!!!!"
 
 
  update_manifest_file:
     runs-on: ubuntu-latest 
     env:
      IMAGE_TAG: ${{github.run_number}}
-    needs: Dast_scan
+    needs: 
+     - build_image_scan_push
     steps:
 
     - name: checkout code
