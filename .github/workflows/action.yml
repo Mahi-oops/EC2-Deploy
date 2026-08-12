@@ -27,7 +27,6 @@ jobs:
   - name: Install the dependencies & build 
     run: | 
      cd backend && npm ci
-     npm run build
   - name: run codeql analysis
     uses: github/codeql-action/analyze@v3
 
