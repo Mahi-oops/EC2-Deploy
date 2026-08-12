@@ -10,14 +10,93 @@ export default function Login() {
   const [dob, setDob] = useState("");
   const [password, setPassword] = useState("");
 
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Temporary only.
-    // We will replace this with backend authentication.
-    navigate("/mode");
+    setError("");
+    setSuccess("");
+    setLoading(true);
+
+    try {
+      let url = "";
+      let requestBody = {};
+
+      // SIGNUP
+      if (isSignup) {
+        url = "http://localhost:3000/api/auth/signup";
+
+        requestBody = {
+          username: username,
+          email: email,
+          dob: dob,
+          password: password,
+        };
+      } else {
+        // LOGIN
+        url = "http://localhost:3000/api/auth/login";
+
+        requestBody = {
+          username: username,
+          password: password,
+        };
+      }
+
+      const response = await fetch(url, {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify(requestBody),
+      });
+
+      const data = await response.json();
+
+      // ERROR FROM BACKEND
+      if (!response.ok) {
+        setError(data.message || "Authentication failed");
+        return;
+      }
+
+      // SIGNUP SUCCESS
+      if (isSignup) {
+        setSuccess("Account created successfully. Please login.");
+
+        // Clear fields
+        setUsername("");
+        setEmail("");
+        setDob("");
+        setPassword("");
+
+        // Switch to login page
+        setIsSignup(false);
+
+        return;
+      }
+
+      // LOGIN SUCCESS
+      localStorage.setItem(
+        "user",
+        JSON.stringify(data.user)
+      );
+
+      navigate("/mode");
+
+    } catch (err) {
+      console.error("Authentication error:", err);
+
+      setError("Unable to connect to backend server");
+
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -46,6 +125,7 @@ export default function Login() {
           “You have a right to perform your prescribed duties, but you are not
           entitled to the fruits of your actions.”
           <br />
+
           <span className="text-lime-400">
             - Bhagavad Gita
           </span>
@@ -59,7 +139,11 @@ export default function Login() {
 
             <button
               type="button"
-              onClick={() => setIsSignup(false)}
+              onClick={() => {
+                setIsSignup(false);
+                setError("");
+                setSuccess("");
+              }}
               className={`w-1/2 py-3 rounded-xl font-semibold transition ${
                 !isSignup
                   ? "bg-lime-400 text-black"
@@ -71,7 +155,11 @@ export default function Login() {
 
             <button
               type="button"
-              onClick={() => setIsSignup(true)}
+              onClick={() => {
+                setIsSignup(true);
+                setError("");
+                setSuccess("");
+              }}
               className={`w-1/2 py-3 rounded-xl font-semibold transition ${
                 isSignup
                   ? "bg-lime-400 text-black"
@@ -83,13 +171,13 @@ export default function Login() {
 
           </div>
 
+          {/* AUTH FORM */}
           <form onSubmit={handleSubmit}>
 
             {/* USERNAME */}
             <input
               type="text"
-              className="w-full mb-4 p-4 rounded-2xl bg-white/10 outline-none
-              focus:ring-2 focus:ring-lime-400 transition"
+              className="w-full mb-4 p-4 rounded-2xl bg-white/10 outline-none focus:ring-2 focus:ring-lime-400 transition"
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -100,8 +188,7 @@ export default function Login() {
             {isSignup && (
               <input
                 type="email"
-                className="w-full mb-4 p-4 rounded-2xl bg-white/10 outline-none
-                focus:ring-2 focus:ring-lime-400 transition"
+                className="w-full mb-4 p-4 rounded-2xl bg-white/10 outline-none focus:ring-2 focus:ring-lime-400 transition"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -113,8 +200,7 @@ export default function Login() {
             {isSignup && (
               <input
                 type="date"
-                className="w-full mb-4 p-4 rounded-2xl bg-white/10 outline-none
-                focus:ring-2 focus:ring-lime-400 transition"
+                className="w-full mb-4 p-4 rounded-2xl bg-white/10 outline-none focus:ring-2 focus:ring-lime-400 transition"
                 value={dob}
                 onChange={(e) => setDob(e.target.value)}
                 required
@@ -124,21 +210,38 @@ export default function Login() {
             {/* PASSWORD */}
             <input
               type="password"
-              className="w-full mb-6 p-4 rounded-2xl bg-white/10 outline-none
-              focus:ring-2 focus:ring-lime-400 transition"
+              className="w-full mb-4 p-4 rounded-2xl bg-white/10 outline-none focus:ring-2 focus:ring-lime-400 transition"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
 
-            {/* SUBMIT */}
+            {/* ERROR MESSAGE */}
+            {error && (
+              <p className="mb-4 text-center text-red-400 text-sm">
+                {error}
+              </p>
+            )}
+
+            {/* SUCCESS MESSAGE */}
+            {success && (
+              <p className="mb-4 text-center text-lime-400 text-sm">
+                {success}
+              </p>
+            )}
+
+            {/* SUBMIT BUTTON */}
             <button
               type="submit"
-              className="w-full py-4 rounded-2xl bg-lime-400 text-black font-semibold
-              hover:scale-105 hover:shadow-[0_0_20px_rgba(163,230,53,0.8)] transition"
+              disabled={loading}
+              className="w-full py-4 rounded-2xl bg-lime-400 text-black font-semibold hover:scale-105 hover:shadow-[0_0_20px_rgba(163,230,53,0.8)] transition disabled:opacity-50"
             >
-              {isSignup ? "Create Account 🚀" : "Start Journey 🚀"}
+              {loading
+                ? "Please wait..."
+                : isSignup
+                ? "Create Account 🚀"
+                : "Start Journey 🚀"}
             </button>
 
           </form>
@@ -149,9 +252,14 @@ export default function Login() {
             {isSignup ? (
               <>
                 Already have an account?{" "}
+
                 <button
                   type="button"
-                  onClick={() => setIsSignup(false)}
+                  onClick={() => {
+                    setIsSignup(false);
+                    setError("");
+                    setSuccess("");
+                  }}
                   className="text-lime-400 hover:underline"
                 >
                   Login
@@ -160,9 +268,14 @@ export default function Login() {
             ) : (
               <>
                 Don't have an account?{" "}
+
                 <button
                   type="button"
-                  onClick={() => setIsSignup(true)}
+                  onClick={() => {
+                    setIsSignup(true);
+                    setError("");
+                    setSuccess("");
+                  }}
                   className="text-lime-400 hover:underline"
                 >
                   Sign Up
@@ -183,3 +296,4 @@ export default function Login() {
     </div>
   );
 }
+
