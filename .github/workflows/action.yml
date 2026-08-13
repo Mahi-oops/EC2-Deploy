@@ -135,7 +135,6 @@ jobs:
      - build_frontend_scan_push
      - build_backend_scan_push
     steps:
-
     - name: checkout code
       uses: actions/checkout@v4
     - name: clone manifest repo
@@ -165,4 +164,4 @@ jobs:
         git commit -m "Update the manifest file booking-app:$IMAGE_TAG"
         git push https://Mahi-oops:${{secrets.CICD_GIT_SECRETS}}@github.com/Mahi-oops/Github_action_CICD_manifest.git main
     - name: success message
-      run: echo "Manifest file updated successfully!!"
+      run: echo "Manifest file updated successfully!!!!!!!!!!!!"
