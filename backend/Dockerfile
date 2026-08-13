@@ -1,5 +1,6 @@
 FROM node:22.20-alpine
 WORKDIR /app
+RUN apk update && apk upgrade 
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
