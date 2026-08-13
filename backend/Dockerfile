@@ -1,4 +1,4 @@
-FROM node:22.20-alpine
+FROM node:22.22.2-alpine
 WORKDIR /app
 RUN apk update && apk upgrade 
 COPY package.json package-lock.json ./
