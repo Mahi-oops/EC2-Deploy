@@ -20,11 +20,11 @@ jobs:
     uses: github/codeql-action/init@v3
     with:
       languages: javascript-typescript
-  - name: Install the dependencies & build 
+  - name: Install the Frontenddependencies & build 
     run: | 
      cd booking && npm ci
      npm run build
-  - name: Install the dependencies & build 
+  - name: Install the Backend dependencies & build 
     run: | 
      cd backend && npm ci
   - name: run codeql analysis
