@@ -29,7 +29,7 @@ export default function Login() {
 
       // SIGNUP
       if (isSignup) {
-        url = "http://localhost:3000/api/auth/signup";
+        url = "/api/auth/signup";
 
         requestBody = {
           username: username,
@@ -39,7 +39,7 @@ export default function Login() {
         };
       } else {
         // LOGIN
-        url = "http://localhost:3000/api/auth/login";
+        url = "/api/auth/login";
 
         requestBody = {
           username: username,
