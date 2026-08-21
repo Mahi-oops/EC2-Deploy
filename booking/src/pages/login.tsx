@@ -130,9 +130,22 @@ export default function Login() {
             - Bhagavad Gita
           </span>
         </p>
+        
+        {/* CREATOR SUBTITLE */}
+         <div className="mt-5 text-center">
+          <p className="text-gray-200 text-sm md:text-base tracking-wide">
+           ✨ Crafted by <span className="text-lime-400 font-semibold">Mahesh Avula</span>
+          </p>
+
+          <p className="mt-2 text-gray-400 text-xs md:text-sm tracking-wider">
+            🌍 A traveler by soul&nbsp;&nbsp;•&nbsp;&nbsp;
+            🍜 foodie by heart&nbsp;&nbsp;•&nbsp;&nbsp;
+            ☁️ DevOps enthusiast by profession
+          </p>
+        </div>
 
         {/* AUTH CARD */}
-        <div className="mt-10 w-full max-w-md p-8 rounded-[2rem] bg-white/10 backdrop-blur-2xl border border-white/20 shadow-2xl">
+       <div className="mt-10 w-full max-w-md p-8 rounded-[2rem] bg-white/10 backdrop-blur-2xl border border-white/20 shadow-2xl">
 
           {/* LOGIN / SIGNUP TABS */}
           <div className="flex mb-8 rounded-2xl bg-white/10 p-1">
