@@ -196,8 +196,8 @@ jobs:
       run: |
         cd Github_action_CICD_manifest && cd frontend
         pwd
-        sed -i "s/booking-app:.*/booking-app:$IMAGE_TAG/g" frontend-deployment.yml
-        cat frontend-deployment.yml
+        sed -i "s/booking-app:.*/booking-app:$IMAGE_TAG/g" frontend-rollout.yml
+        cat frontend-rollout.yml
     - name: Update the backend-deployment file
       run: |
         cd Github_action_CICD_manifest && cd backend
