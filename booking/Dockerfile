@@ -7,6 +7,7 @@ COPY . .
 RUN npm run build
 # stage-2 Deploy with nginx
 FROM nginx:alpine  
+RUN apk update && apk upgrade 
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
