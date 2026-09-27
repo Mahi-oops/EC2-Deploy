@@ -1,10 +1,9 @@
 import { useState } from "react";
-
-import hotelHero from "../assets/hotel-hero.jpg";
+import hotelHeroImg from "../assets/hotel-hero.jpg";
 import tajImg from "../assets/taj.jpg";
 import goaImg from "../assets/goa.jpg";
-import urbanImg from "../assets/urban.jpg";
-import fernImg from "../assets/fern.jpg";
+import urbanImg from "../assets/urban.png";
+import fernImg from "../assets/fern.png";
 
 type Hotel = {
   id: number;
@@ -157,7 +156,7 @@ export default function HotelPage() {
         {/* HERO IMAGE */}
 
         <img
-          src={hotelHero}
+          src={hotelHeroImg}
           alt="Hotel"
           className="absolute inset-0 h-full w-full object-cover"
         />
